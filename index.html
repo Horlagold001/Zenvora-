@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0b">
+    <meta name="description" content="OGA connects people with opportunities, customers, skills and business resources.">
+    <title>ZENVORA — Where Possibilities Become Opportunities</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <header class="topbar">
+        <a href="#" class="brand" data-page="home">
+            <span class="brand-icon">Z</span>
+            <span>ZENVORA<span class="gold">.</span>
+                <small>OPPORTUNITY ENGINE</small>
+                <p class="tagline">Where Possibilities Become Opportunities.</p>
+            </span>
+        </a>
+
+       <div class="header-actions">
+
+    <button
+        type="button"
+        id="menuToggle"
+        class="menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false">
+        ☰
+    </button>
+
+    <button
+        class="profile-button"
+        data-page="account"
+        aria-label="My account">
+        👤
+    </button>
+
+</div>
+    </header>
+    
+    <!-- ZENVORA NAVIGATION MENU -->
+
+<div id="menuOverlay" class="menu-overlay" hidden></div>
+
+<aside
+    id="navigationMenu"
+    class="navigation-menu"
+    aria-label="Main navigation"
+    aria-hidden="true">
+
+    <div class="menu-heading">
+        <div>
+            <strong>ZENVORA<span class="gold">.</span></strong>
+            <small>OPPORTUNITY ENGINE</small>
+        </div>
+
+        <button
+            type="button"
+            id="menuClose"
+            class="menu-close"
+            aria-label="Close navigation menu">
+            ✕
+        </button>
+    </div>
+
+    <p class="menu-label">MAIN MENU</p>
+
+    <button class="menu-link" data-page="home">
+        <span>⌂</span>
+        <span>Home</span>
+        <span class="menu-arrow">›</span>
+    </button>
+
+    <button class="menu-link" data-page="discover">
+        <span>⌕</span>
+        <span>Discover Opportunities</span>
+        <span class="menu-arrow">›</span>
+    </button>
+
+    <button class="menu-link" data-page="post">
+        <span>＋</span>
+        <span>Post Opportunity</span>
+        <span class="menu-arrow">›</span>
+    </button>
+
+    <button class="menu-link" data-page="business">
+        <span>▤</span>
+        <span>My Business</span>
+        <span class="menu-arrow">›</span>
+    </button>
+
+    <button class="menu-link" data-page="messages">
+        <span>✉</span>
+        <span>Messages</span>
+        <span class="menu-arrow">›</span>
+    </button>
+
+    <button class="menu-link" data-page="account">
+        <span>○</span>
+        <span>My Account</span>
+        <span class="menu-arrow">›</span>
+    </button>
+
+    <div class="menu-footer">
+        <span class="live-dot"></span>
+        <span>Where Possibilities Become Opportunities.</span>
+    </div>
+
+</aside>
+
+    <main id="app">
+
+        <!-- HOME -->
+        <section class="page active" id="home">
+            <div class="hero">
+                <span class="eyebrow">YOUR NEXT OPPORTUNITY STARTS HERE</span>
+
+                <h1>Turn what you have<br>into <span class="gold">what you need.</span></h1>
+
+                <p>Find customers. Discover skills. Share resources. Create opportunities.</p>
+
+                <div class="hero-actions">
+                    <button class="btn btn-gold" data-page="post">＋ Post Opportunity</button>
+                    <button class="btn btn-outline" data-page="discover">Explore</button>
+                </div>
+
+                <div class="hero-note">
+                    <span class="live-dot"></span>
+                    Every connection starts with an opportunity.
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">EXPLORE</span>
+                    <h2>What are you looking for?</h2>
+                </div>
+            </div>
+
+            <div class="category-grid">
+                <button class="category-card" data-category="Services">
+                    <span class="category-icon">🛠️</span>
+                    <strong>Services</strong>
+                    <small>Find skilled people</small>
+                </button>
+
+                <button class="category-card" data-category="Customers">
+                    <span class="category-icon">🛍️</span>
+                    <strong>Customers</strong>
+                    <small>Grow your business</small>
+                </button>
+
+                <button class="category-card" data-category="Resources">
+                    <span class="category-icon">📦</span>
+                    <strong>Resources</strong>
+                    <small>Put unused assets to work</small>
+                </button>
+
+                <button class="category-card" data-category="Partnerships">
+                    <span class="category-icon">🤝</span>
+                    <strong>Partnerships</strong>
+                    <small>Build together</small>
+                </button>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">FRESH DISCOVERIES</span>
+                    <h2>Recent opportunities</h2>
+                </div>
+                <button class="text-button" data-page="discover">See all →</button>
+            </div>
+
+            <div id="homeListings" class="listing-container"></div>
+
+            <div class="empty-state" id="homeEmpty">
+                <span>✦</span>
+                <h3>Your opportunity board awaits</h3>
+                <p>Post the first opportunity and start building connections.</p>
+                <button class="btn btn-gold" data-page="post">Create opportunity</button>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">THE OGA IDEA</span>
+                    <h2>Opportunity is everywhere.</h2>
+                </div>
+            </div>
+
+            <div class="idea-card">
+                <span class="idea-symbol">✦</span>
+                <p>A business has unused equipment. A professional has free time. A customer needs a service.</p>
+                <p class="gold">OGA brings these possibilities together.</p>
+            </div>
+            <!-- PRIVATE FOUNDER DASHBOARD ENTRY -->
+<button
+    type="button"
+    id="zenvora-dashboard-open"
+    class="founder-access-button"
+    hidden>
+    <span class="founder-crown">♛</span>
+    <span>Founder Dashboard</span>
+    <span class="founder-arrow">→</span>
+</button>
+        </section>
+
+
+        <!-- DISCOVER -->
+        <section class="page" id="discover">
+            <div class="page-heading">
+                <span class="eyebrow">FIND YOUR NEXT MOVE</span>
+                <h1>Discover<span class="gold">.</span></h1>
+                <p>Explore opportunities posted on this device.</p>
+            </div>
+
+            <label class="search-box">
+                <span>⌕</span>
+                <input type="search" id="searchInput" placeholder="Search services, skills, resources...">
+            </label>
+
+            <div class="filter-row" id="filterRow">
+                <button class="filter-chip selected" data-filter="All">All</button>
+                <button class="filter-chip" data-filter="Services">Services</button>
+                <button class="filter-chip" data-filter="Customers">Customers</button>
+                <button class="filter-chip" data-filter="Resources">Resources</button>
+                <button class="filter-chip" data-filter="Partnerships">Partnerships</button>
+                <button class="filter-chip" data-filter="Jobs">Jobs</button>
+            </div>
+
+            <div class="results-label" id="resultsLabel">Available opportunities</div>
+            <div id="discoverListings" class="listing-container"></div>
+
+            <div class="empty-state" id="discoverEmpty">
+                <span>⌕</span>
+                <h3>No matching opportunities</h3>
+                <p>Try a different search or create an opportunity of your own.</p>
+                <button class="btn btn-gold" data-page="post">Post an opportunity</button>
+            </div>
+        </section>
+
+
+        <!-- POST OPPORTUNITY -->
+        <section class="page" id="post">
+            <div class="page-heading">
+                <span class="eyebrow">MAKE A CONNECTION</span>
+                <h1>Post an <span class="gold">opportunity.</span></h1>
+                <p>Tell people what you need, what you offer, or what you have available.</p>
+            </div>
+
+            <form id="opportunityForm" class="form-card">
+                <div class="form-intro">
+                    <span class="form-number">01</span>
+                    <div>
+                        <h3>Opportunity details</h3>
+                        <p>Give your listing a clear description.</p>
+                    </div>
+                </div>
+
+                <label for="title">Opportunity title *</label>
+                <input type="text" id="title" maxlength="80"
+                       placeholder="e.g. I need a reliable furniture maker" required>
+
+                <label for="category">Category *</label>
+                <select id="category" required>
+                    <option value="">Choose a category</option>
+                    <option value="Services">Services</option>
+                    <option value="Customers">Customers</option>
+                    <option value="Resources">Resources</option>
+                    <option value="Partnerships">Partnerships</option>
+                    <option value="Jobs">Jobs</option>
+                </select>
+
+                <label for="type">What describes this opportunity? *</label>
+                <select id="type" required>
+                    <option value="">Choose one</option>
+                    <option value="I need something">I need something</option>
+                    <option value="I offer a service">I offer a service</option>
+                    <option value="I have a resource">I have a resource</option>
+                    <option value="I want a partner">I want a partner</option>
+                    <option value="I am hiring">I am hiring</option>
+                </select>
+
+                <label for="description">Description *</label>
+                <textarea id="description" rows="5" maxlength="1000"
+                          placeholder="Explain what you need or offer, including important details..." required></textarea>
+
+                <label for="location">Location *</label>
+                <input type="text" id="location" maxlength="100"
+                       placeholder="e.g. Osogbo, Osun State" required>
+
+                <div class="form-divider"></div>
+
+                <div class="form-intro">
+                    <span class="form-number">02</span>
+                    <div>
+                        <h3>How can people reach you?</h3>
+                        <p>Use a contact number you are comfortable sharing.</p>
+                    </div>
+                </div>
+
+                <label for="contactName">Your name or business name *</label>
+                <input type="text" id="contactName" maxlength="80"
+                       placeholder="Name or business name" required>
+
+                <label for="phone">Phone number *</label>
+                <input type="tel" id="phone" maxlength="25"
+                       placeholder="e.g. 08012345678" required>
+
+                <div class="privacy-note">
+                    <span>ⓘ</span>
+                    <p>Your listing and contact details are stored in this browser in this prototype. Don't include sensitive personal information.</p>
+                </div>
+
+                <button type="submit" class="btn btn-gold submit-button">
+                    Publish opportunity →
+                </button>
+            </form>
+        </section>
+        
+        <section class="page" id="account">
+
+    <div class="page-heading">
+        <span class="eyebrow">YOUR ZENVORA SPACE</span>
+        <h1>My Account<span class="gold">.</span></h1>
+        <p>Join Zenvora to connect with real-world opportunities.</p>
+    </div>
+
+    <!-- AUTHENTICATION CARD -->
+    <div class="account-card" id="authCard">
+
+        <div class="account-avatar">Z</div>
+
+        <h2 id="authHeading">Welcome to Zenvora</h2>
+
+        <p id="authDescription">
+            Create an account or log in to get started.
+        </p>
+
+        <!-- AUTH MESSAGE -->
+        <p id="authMessage" role="status" aria-live="polite"></p>
+
+        <!-- SIGN UP / LOGIN FORM -->
+        <form id="authForm">
+
+            <div id="nameField">
+                <label for="authName">Full name</label>
+
+                <input
+                    type="text"
+                    id="authName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                >
+            </div>
+
+            <label for="authEmail">Email address</label>
+
+            <input
+                type="email"
+                id="authEmail"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+            >
+
+            <label for="authPassword">Password</label>
+
+            <input
+                type="password"
+                id="authPassword"
+                placeholder="At least 8 characters"
+                minlength="8"
+                autocomplete="new-password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="btn btn-gold full-width"
+                id="authSubmitButton">
+                Create Account
+            </button>
+
+        </form>
+
+        <p>
+            <span id="authSwitchText">Already have an account?</span>
+
+            <button
+                type="button"
+                id="authSwitchButton">
+                Log in
+            </button>
+        </p>
+
+    </div>
+
+
+    <!-- SIGNED-IN ACCOUNT -->
+    <div class="account-card" id="loggedInCard" hidden>
+
+        <div class="account-avatar">Z</div>
+
+        <h2 id="loggedInName">Welcome!</h2>
+
+        <p id="loggedInEmail"></p>
+
+        <p>Your Zenvora account is connected.</p>
+
+        <button
+            type="button"
+            class="btn btn-gold full-width"
+            data-page="post">
+            Post an opportunity
+        </button>
+
+        <button
+            type="button"
+            class="btn full-width"
+            id="logoutButton">
+            Log out
+        </button>
+
+    </div>
+
+
+    <!-- SETTINGS -->
+    <div class="settings-card">
+
+        <div class="setting-row">
+            <div>
+                <strong>App version</strong>
+                <p>Early prototype</p>
+            </div>
+
+            <span class="status-badge">V1.0</span>
+        </div>
+
+        <div class="setting-row">
+            <div>
+                <strong>Storage</strong>
+                <p>Local listings and Supabase account services</p>
+            </div>
+
+            <span class="status-badge">Beta</span>
+        </div>
+
+        <div class="setting-row">
+            <div>
+                <strong>Online marketplace</strong>
+                <p>Online publishing requires authentication and database permissions.</p>
+            </div>
+
+            <span class="status-badge pending">In progress</span>
+        </div>
+
+    </div>
+
+
+    <button
+        id="clearDataButton"
+        class="btn btn-danger full-width">
+        Clear local prototype data
+    </button>
+
+    <p class="small-note">
+        Clearing local data removes locally saved listings from this
+        browser. It does not delete your Supabase account.
+    </p>
+
+</section>
+
+
+        <!-- MY BUSINESS -->
+        <section class="page" id="business">
+            <div class="page-heading">
+                <span class="eyebrow">BUILD YOUR PRESENCE</span>
+                <h1>My Business<span class="gold">.</span></h1>
+                <p>Your listings are the beginning of your opportunity profile.</p>
+            </div>
+
+            <div class="business-summary">
+                <div class="business-avatar">O</div>
+                <div>
+                    <h3 id="businessName">Your opportunity profile</h3>
+                    <p id="businessPhone">Add a listing to get started.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <strong id="myListingCount">0</strong>
+                    <span>Listings on this device</span>
+                </div>
+                <div class="stat-card">
+                    <strong>Local</strong>
+                    <span>Prototype storage</span>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">YOUR ACTIVITY</span>
+                    <h2>Your listings</h2>
+                </div>
+                <button class="text-button" data-page="post">＋ Add</button>
+            </div>
+
+            <div id="businessListings" class="listing-container"></div>
+
+            <div class="empty-state" id="businessEmpty">
+                <span>＋</span>
+                <h3>Nothing posted yet</h3>
+                <p>Your opportunities will appear here after you publish them.</p>
+                <button class="btn btn-gold" data-page="post">Create first listing</button>
+            </div>
+        </section>
+        
+        <!-- ZENVORA MESSAGES PAGE -->
+<section class="page" id="messages">
+    <!-- FIND A MEMBER -->
+<div class="member-search-section">
+    <h3>Find a Member</h3>
+    <p>Connect with people and discover new opportunities.</p>
+
+    <form id="member-search-form">
+        <input
+            type="search"
+            id="member-search-input"
+            placeholder="Search by name or username..."
+            minlength="2"
+            maxlength="60"
+            autocomplete="off"
+            required
+        >
+        <button type="submit" id="member-search-button">Search</button>
+    </form>
+
+    <div id="member-search-status" aria-live="polite"></div>
+    <div id="member-search-results"></div>
+</div>
+
+    <div class="page-heading">
+        <span class="eyebrow">STAY CONNECTED</span>
+        <h1>Messages<span class="gold">.</span></h1>
+        <p>Connect with people. Build opportunities.</p>
+    </div>
+
+    <div id="messages-status" class="messages-status">
+        Your conversations will appear here.
+    </div>
+
+    <div id="conversations-list" class="conversations-list"></div>
+
+    <div id="chat-panel" class="chat-panel" hidden>
+
+        <div class="chat-header">
+            <button type="button" id="close-chat">
+                ← Back
+            </button>
+
+            <h3 id="chat-title">Conversation</h3>
+        </div>
+
+        <div
+            id="chat-messages"
+            class="chat-messages"
+            aria-live="polite">
+        </div>
+
+        <form id="message-form" class="message-form">
+
+            <input
+                type="text"
+                id="message-input"
+                placeholder="Write a message..."
+                maxlength="5000"
+                autocomplete="off"
+                required>
+
+            <button type="submit" id="send-message">
+                Send
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+<!-- END ZENVORA MESSAGES PAGE -->
+
+
+     <button
+    type="button"
+    id="zenvora-dashboard-open"
+    class="btn btn-gold"
+    style="width:100%; margin-top:12px;">
+    💰 Founder Dashboard
+</button>
+
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+
+    
+    <!-- ZENVORA OPPORTUNITY CHAIN --><div id="zenvora-chain-widget">
+    <button id="zenvora-chain-open" type="button">
+        🔗 Opportunity Chain
+    </button><section id="zenvora-chain-panel" hidden>
+    <div class="chain-header">
+        <div>
+            <h2>Opportunity Chain</h2>
+            <p>One opportunity can create many more.</p>
+        </div>
+        <button id="zenvora-chain-close" type="button"
+            aria-label="Close">✕</button>
+    </div>
+
+    <form id="zenvora-chain-form">
+        <label for="chain-title">What opportunity do you have?</label>
+        <input id="chain-title" type="text"
+            placeholder="e.g. Customer needs a metal gate" required>
+
+        <label for="chain-category">Opportunity category</label>
+        <select id="chain-category" required>
+            <option value="">Choose a category</option>
+            <option>Services</option>
+            <option>Customers</option>
+            <option>Materials and Resources</option>
+            <option>Transport and Delivery</option>
+            <option>Business Partnership</option>
+            <option>Jobs and Skills</option>
+            <option>Other</option>
+        </select>
+
+        <label for="chain-location">Location</label>
+        <input id="chain-location" type="text"
+            placeholder="e.g. Osogbo, Osun State" required>
+
+        <label for="chain-description">Additional details</label>
+        <textarea id="chain-description" rows="3"
+            placeholder="Explain what is needed and who could help"></textarea>
+
+        <button class="chain-submit" type="submit">
+            Create Opportunity Chain
+        </button>
+    </form>
+
+    <div class="chain-notice">
+        <strong>How it works</strong>
+        <p>A customer request could create opportunities for a service
+            provider, supplier, or transporter. Start by recording the
+            opportunity, then identify the connections it needs.</p>
+    </div>
+
+    <h3>Your Opportunity Chains</h3>
+    <div id="zenvora-chain-list"></div>
+
+    <p class="chain-storage-note">
+        Prototype: chains are saved on this device only.
+    </p>
+    
+</section>
+
+    
+<button
+        type="button"
+        id="zenvora-dashboard-close"
+        class="btn">
+        ← Back to Zenvora
+    </button>
+    
+
+
+    <!-- PRICING PLANS -->
+    <div class="founder-panel">
+        <h2>Revenue Plans</h2>
+        <p>Proposed pricing for Zenvora's paid services.</p>
+
+        <div id="founderPlans">
+            <p>Pricing plans will load when database integration is connected.</p>
+        </div>
+    </div>
+
+    <!-- TRANSACTION HISTORY -->
+    <div class="founder-panel">
+        <h2>Recent Transactions</h2>
+
+        <div id="founderTransactions">
+            <p>No transaction records loaded yet.</p>
+        </div>
+    </div>
+=""
+    <!-- FOUNDER SETTINGS -->
+    <div class="founder-panel">
+        <h2>Platform Management</h2>
+
+        <div class="founder-stat-row">
+            <span>Payment Integration</span>
+            <strong>Pending</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Subscription System</span>
+            <strong>In Progress</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Featured Listings</span>
+            <strong>In Progress</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Founder Authorization</span>
+            <strong>Required</strong>
+        </div>
+    </div>
+
+    <p class="small-note">
+        Important: This is currently a dashboard interface, not a live financial
+        reporting system. Revenue figures must come from verified payment records.
+        Founder-only access must be enforced securely before launch.
+    </p>
+
+</section>
+</div>
+<!-- ZENVORA FOUNDER DASHBOARD -->
+<section class="page" id="founderDashboard">
+    <button
+    type="button"
+    id="zenvora-dashboard-close"
+    class="btn btn-gold"
+    style="margin-bottom:20px;">
+    ← Back to Zenvora
+</button>="="""
+
+    <div class="page-heading">
+        <span class="eyebrow">ZENVORA MANAGEMENT</span>
+        <h1>Founder Dashboard<span class="gold">.</span></h1>
+        <p>Manage revenue, subscriptions and marketplace growth.</p>
+    </div>
+
+    <div class="founder-notice">
+        <strong>Dashboard Status</strong>
+        <p>Connect the secure database to display verified financial figures.</p>
+    </div>
+
+    <div class="revenue-grid">
+
+        <div class="revenue-card">
+            <span>Total Revenue</span>
+            <h2 id="totalRevenue">₦0</h2>
+            <p>Verified payments</p>
+        </div>
+
+        <div class="revenue-card">
+            <span>This Month</span>
+            <h2 id="monthlyRevenue">₦0</h2>
+            <p>Monthly revenue</p>
+        </div>
+
+        <div class="revenue-card">
+            <span>Active Subscriptions</span>
+            <h2 id="activeSubscriptions">0</h2>
+            <p>Paid subscribers</p>
+        </div>
+
+        <div class="revenue-card">
+            <span>Featured Listings</span>
+            <h2 id="activeFeatured">0</h2>
+            <p>Active promotions</p>
+        </div>
+
+    </div>
+
+    <div class="founder-panel">
+        <h2>Marketplace Overview</h2>
+
+        <div class="founder-stat-row">
+            <span>Opportunities</span>
+            <strong id="totalOpportunities">—</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Businesses</span>
+            <strong id="totalBusinesses">—</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Pending Payments</span>
+            <strong id="pendingPayments">—</strong>
+        </div>
+    </div>
+
+    <div class="founder-panel">
+        <h2>Revenue Plans</h2>
+        <div id="founderPlans">
+            <p>Pricing plans will appear here.</p>
+        </div>
+    </div>
+
+    <div class="founder-panel">
+        <h2>Recent Transactions</h2>
+        <div id="founderTransactions">
+            <p>No transactions loaded yet.</p>
+        </div>
+    </div>
+
+    <div class="founder-panel">
+        <h2>Platform Management</h2>
+
+        <div class="founder-stat-row">
+            <span>Payment Integration</span>
+            <strong>Pending</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Subscription System</span>
+            <strong>In Progress</strong>
+        </div>
+
+        <div class="founder-stat-row">
+            <span>Founder Access Protection</span>
+            <strong>Required</strong>
+        </div>
+    </div>
+
+    <p class="small-note">
+        This is a dashboard interface, not a live financial report.
+        Secure founder authorization and verified payment integration
+        are required before displaying real financial data.
+    </p>
+<div id="zenvora-Dashboard-panel" hidden>
+</div>
+</section>
+<!-- END ZENVORA FOUNDER DASHBOARD -->
+<script>
+(function () {
+    const openButton = document.getElementById("zenvora-chain-open");
+    const closeButton = document.getElementById("zenvora-chain-close");
+    const panel = document.getElementById("zenvora-chain-panel");
+    const form = document.getElementById("zenvora-chain-form");
+    const list = document.getElementById("zenvora-chain-list");
+
+    if (!openButton || !closeButton || !panel || !form || !list) {
+        return;
+    }
+
+    function getChains() {
+        try {
+            return JSON.parse(
+                localStorage.getItem("zenvoraOpportunityChains") || "[]"
+            );
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveChains(chains) {
+        localStorage.setItem(
+            "zenvoraOpportunityChains",
+            JSON.stringify(chains)
+        );
+    }
+
+    function renderChains() {
+        const chains = getChains();
+        list.replaceChildren();
+
+        if (chains.length === 0) {
+            const empty = document.createElement("p");
+            empty.textContent =
+                "No chains yet. Create your first opportunity chain above.";
+            list.appendChild(empty);
+            return;
+        }
+
+        chains.slice().reverse().forEach(function (chain) {
+            const card = document.createElement("article");
+            card.className = "chain-card";
+
+            const titleElement = document.createElement("h4");
+            titleElement.textContent = chain.title;
+
+            const categoryElement = document.createElement("p");
+            categoryElement.textContent = "Category: " + chain.category;
+
+            const locationElement = document.createElement("p");
+            locationElement.textContent = "Location: " + chain.location;
+
+            const descriptionElement = document.createElement("p");
+            descriptionElement.textContent =
+                chain.description || "No extra details.";
+
+            const dateElement = document.createElement("small");
+            dateElement.textContent = chain.date || "";
+
+            card.append(
+                titleElement,
+                categoryElement,
+                locationElement,
+                descriptionElement,
+                dateElement
+            );
+
+            list.appendChild(card);
+        });
+    }
+
+    openButton.addEventListener("click", function () {
+        panel.hidden = false;
+        openButton.hidden = true;
+        renderChains();
+    });
+
+    closeButton.addEventListener("click", function () {
+        panel.hidden = true;
+        openButton.hidden = false;
+    });
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById("chain-title").value.trim();
+        const category =
+            document.getElementById("chain-category").value;
+        const location =
+            document.getElementById("chain-location").value.trim();
+        const description =
+            document.getElementById("chain-description").value.trim();
+
+        if (!title || !category || !location) {
+            alert("Please complete the opportunity title, category, and location.");
+            return;
+        }
+
+        try {
+            const { error } = await supabaseClient
+                .from("opportunities")
+                .insert({
+                    title: title,
+                    category: category,
+                    location: location,
+                    description: description,
+                    status: "active"
+                });
+
+            if (error) {
+                console.error("Supabase publishing error:", error);
+                alert("Could not publish opportunity: " + error.message);
+                return;
+            }
+
+            const chains = getChains();
+
+            chains.push({
+                id: Date.now(),
+                title: title,
+                category: category,
+                location: location,
+                description: description,
+                date: new Date().toLocaleDateString()
+            });
+
+            saveChains(chains);
+            form.reset();
+            renderChains();
+
+            alert("Your opportunity has been published successfully!");
+
+        } catch (error) {
+            console.error("Publishing error:", error);
+            alert("Something went wrong: " + error.message);
+        }
+    });
+
+    renderChains();
+})();
+</script>
+<script>
+const SUPABASE_URL = "https://awwugpaxlrgogyagknjb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_6fx0r3c1p5aUsjLtbHGBfQ_6EH6o5Qk";
+
+window.supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+
+console.log("Zenvora Supabase client initialized");
+</script>
+<script src="script.js"></script>
+<script>
+async function testZenvoraConnection() {
+    try {
+        const { data, error } = await window.supabaseClient
+            .from("opportunities")
+            .select("id")
+            .limit(1);
+
+        if (error) {
+            console.error("ZENVORA DATABASE ERROR:", error);
+            alert("Database Error: " + error.message);
+            return;
+        }
+
+        console.log("Zenvora database connection successful!");
+        console.log("Database records:", data);
+
+    } catch (error) {
+        console.error("ZENVORA CONNECTION FAILED:", error);
+        alert("Connection failed: " + error.message);
+    }
+}
+
+testZenvoraConnection();
+</script>
+</body>
+</html>    
