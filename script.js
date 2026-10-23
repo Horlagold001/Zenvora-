@@ -403,135 +403,104 @@ document.addEventListener("DOMContentLoaded", function () {
         renderBusiness();
     }
 
+// ==========================================
+// 6. POST A NEW OPPORTUNITY
+// ==========================================
 
-    // ==========================================
-    // 6. POST A NEW OPPORTUNITY
-    // ==========================================
+if (opportunityForm) {
+    opportunityForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    if (opportunityForm) {
+        const title = getFieldValue(titleInput);
+        const category = getFieldValue(categoryInput);
+        const type = getFieldValue(typeInput);
+        const description = getFieldValue(descriptionInput);
+        const location = getFieldValue(locationInput);
+        const contactName = getFieldValue(contactInput);
+        const phone = getFieldValue(phoneInput);
 
-        opportunityForm.addEventListener("submit", async function (event) {
+        if (!title || !category || !location) {
+            alert("Please enter an opportunity title, category, and location.");
+            return;
+        }
 
-            event.preventDefault();
+        if (
+            !window.supabaseClient ||
+            typeof window.supabaseClient.from !== "function"
+        ) {
+            alert("Online publishing is unavailable. Please try again later.");
+            return;
+        }
 
-            const title = getFieldValue(titleInput);
-            const category = getFieldValue(categoryInput);
-            const type = getFieldValue(typeInput);
-            const description = getFieldValue(descriptionInput);
-            const location = getFieldValue(locationInput);
-            const contactName = getFieldValue(contactInput);
-            const phone = getFieldValue(phoneInput);
+        try {
+            const client = window.supabaseClient;
 
-            // Validate required fields.
-            if (!title || !category || !location) {
+            const { data: authData, error: authError } =
+                await client.auth.getUser();
 
-                alert(
-                    "Please enter an opportunity title, category, and location."
-                );
+            if (authError) throw authError;
 
+            if (!authData.user) {
+                alert("Please log in before publishing an opportunity.");
                 return;
             }
 
+            const { data: onlineOpportunity, error } = await client
+                .from("opportunities")
+                .insert({
+                    user_id: authData.user.id,
+                    title: title,
+                    category: category,
+                    opportunity_type: type,
+                    description: description,
+                    location: location,
+                    contact_name: contactName,
+                    contact_phone: phone,
+                    status: "active"
+                })
+                .select()
+                .single();
+
+            if (error) throw error;
+
+            // Save a local copy only after the online save succeeds.
             const opportunity = {
-                id: "zenvora_" + Date.now(),
-                title: title,
-                category: category,
-                type: type,
-                description: description,
-                location: location,
-                contactName: contactName,
-                phone: phone,
+                id: onlineOpportunity.id,
+                user_id: authData.user.id,
+                title: onlineOpportunity.title,
+                category: onlineOpportunity.category,
+                type: onlineOpportunity.opportunity_type,
+                description: onlineOpportunity.description,
+                location: onlineOpportunity.location,
+                contactName: onlineOpportunity.contact_name,
+                phone: onlineOpportunity.contact_phone,
                 date: new Date().toLocaleDateString(),
-                status: "active"
+                status: onlineOpportunity.status
             };
 
             const opportunities = getOpportunities();
-
             opportunities.push(opportunity);
+            saveOpportunities(opportunities);
 
-            // Save the opportunity locally first.
-            const saved = saveOpportunities(opportunities);
-
-            if (!saved) {
-                return;
-            }
-
-            // Refresh all listing areas.
             renderAllOpportunities();
-
-            // Reset the form after a successful local save.
             opportunityForm.reset();
 
+            alert("Success! Your opportunity has been published online.");
+
+        } catch (error) {
+            console.error("Opportunity publishing failed:", error);
             alert(
-                "Your opportunity has been published on this device."
+                "Online publishing failed: " +
+                (error.message || "Unknown error") +
+                "\nYour opportunity has not been confirmed as published."
             );
-
-            // Save to Supabase if a client is available.
-            if (
-                window.supabaseClient &&
-                typeof window.supabaseClient.from === "function"
-            ) {
-                try {
-                    const client = window.supabaseClient;
-
-                    const { data: authData, error: authError } =
-                        await client.auth.getUser();
-
-                    if (authError) {
-                        throw authError;
-                    }
-
-                    if (!authData.user) {
-                        console.log(
-                            "Sign in to publish this opportunity to Supabase."
-                        );
-                        return;
-                    }
-
-                    const { error } = await client
-                        .from("opportunities")
-                        .insert({
-                            user_id: authData.user.id,
-                            title: title,
-                            category: category,
-                            type: type,
-                            description: description,
-                            location: location,
-                            contact_name: contactName,
-                            phone: phone,
-                            status: "active"
-                        });
-
-                    if (error) {
-                        throw error;
-                    }
-
-                    console.log(
-                        "Opportunity saved to Supabase successfully."
-                    );
-
-                } catch (error) {
-                    console.error(
-                        "Supabase connection error:",
-                        error
-                    );
-
-                    alert(
-                        "Your opportunity was saved locally, but publishing " +
-                        "to the shared database failed. Check the console."
-                    );
-                }
-            }
-
-                    });
-
-    } else {
-
-        console.warn(
-            "Zenvora: The opportunity form with ID 'opportunityForm' was not found."
-        );
-
-    }
+        }
+    });
+} else {
+    console.warn(
+        "Zenvora: The opportunity form with ID 'opportunityForm' was not found."
+    );
+}
 
 
     // ==========================================
